@@ -5,17 +5,28 @@
 </head>
 
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "restaurant";
+// Include database configuration
+require_once 'db_config.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create secure connection (Azure MySQL requires TLS)
+$conn = mysqli_init();
+
+if (!$conn) {
+  die("MySQL initialization failed.");
+}
+
+mysqli_ssl_set($conn, null, null, null, null, null);
+
+$sslFlags = MYSQLI_CLIENT_SSL;
+if (defined('MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT')) {
+  $sslFlags |= MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
+}
+
+$connected = mysqli_real_connect($conn, $servername, $username, $password, $dbname, 3306, null, $sslFlags);
 
 // Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+if (!$connected) {
+  die("Connection failed: " . mysqli_connect_error());
 }
 echo "Connected successfully <br>";
 

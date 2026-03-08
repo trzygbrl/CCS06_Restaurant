@@ -14,79 +14,41 @@ if (!$connected) {
   <title>Potato Corner Menu</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-    body {
-      background: #f8f9fa;
-    }
-
-    .title-green {
-      color: #0a8f1f;
-      font-weight: 700;
-    }
-
-    .product-image {
-      width: 100%;
-      height: 220px;
-      object-fit: contain;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <nav class="navbar navbar-light justify-content-center fs-3 mb-5" style="background-color: #0a8f1f; color: white; font-weight: 700;">
-        PHP Complete CRUD Application
+  <nav id="home" class="navbar main-navbar mb-5 px-3">
+    <button class="btn navbar-toggle-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-label="Open sidebar navigation">
+      <i class="fa-solid fa-bars fs-5"></i>
+    </button>
+    <p class="navbar-title">PHP Complete CRUD Application</p>
   </nav>
 
-  <div class="container">
-    <?php
-    if (isset($_GET["msg"])) {
-      $msg = $_GET["msg"];
-      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-      ' . $msg . '
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>';
-    }
-    ?>
-
-  <div class="container">
-    <a href="add_new.php" class="btn btn-success mb-3">Add New</a>
-
-    <table class="table table-hover text-center">
-      <thead class="table-success">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Date Created</th>
-          <th scope="col">Date Updated</th>
-          <th scope="col">Date Deleted</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        $sql = "SELECT * FROM Menus";
-        $result = mysqli_query($conn, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-          <tr>
-            <td><?php echo $row["ID"] ?></td>
-            <td><?php echo $row["Name"] ?></td>
-            <td><?php echo $row["DateCreated"] ?></td>
-            <td><?php echo $row["DateUpdated"] ?></td>
-            <td><?php echo $row["DateDeleted"] ?></td>
-            <td>
-              <a href="edit.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-              <a href="delete.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
-            </td>
-          </tr>
-        <?php
-        }
-        ?>
-      </tbody>
-    </table>
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarNav" aria-labelledby="sidebarNavLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sidebarNavLabel">Navigation</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body ">
+      <ul class="nav flex-column gap-2">
+        <li class="nav-item">
+          <a class="nav-link" href="index.php" data-bs-dismiss="offcanvas">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="menu.php" data-bs-dismiss="offcanvas">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="product.php" data-bs-dismiss="offcanvas">Products</a>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="container py-4">
+  <div class="container">
+  </div>
+
+  <div id="products" class="container py-4">
     <h1 class="text-center title-green mb-4">POTATO CORNER MENU LIST</h1>
 
     <?php
@@ -100,17 +62,17 @@ if (!$connected) {
 
     <div class="row g-4">
       <?php
-        while($row = $result->fetch_assoc()) {
-          echo '<div class="col-12 col-md-6">';
-          echo '  <div class="card h-100 shadow-sm border-0">';
-          echo '    <img src="' . $row["ImagePath"] . '" class="product-image p-3" alt="Image could not be found">';
-          echo '    <div class="card-body pt-0">';
-          echo '      <h5 class="card-title fw-bold text-uppercase mb-2">' . $row["Name"] . '</h5>';
-          echo '      <p class="card-text fs-5 mb-0">Price: ₱ ' . $row["Price"] . '</p>';
-          echo '    </div>';
-          echo '  </div>';
-          echo '</div>';
-        }
+        while($row = $result->fetch_assoc()) { ?>
+          <div class="col-12 col-md-6">
+            <div class="card h-100 shadow-sm border-0">
+              <img src="<?php echo $row["ImagePath"]; ?>" class="product-image p-3" alt="Image could not be found">
+              <div class="card-body pt-0">
+                <h5 class="card-title fw-bold text-uppercase mb-2"><?php echo $row["Name"]; ?></h5>
+                <p class="card-text fs-5 mb-0">Price: ₱ <?php echo $row["Price"]; ?></p>
+              </div>
+            </div>
+          </div>
+        <?php }
       ?>
     </div>
     <?php
@@ -125,6 +87,22 @@ if (!$connected) {
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    const sidebarLinks = document.querySelectorAll('#sidebarNav .nav-link');
+
+    sidebarLinks.forEach((link) => {
+      link.addEventListener('click', function (event) {
+        const targetUrl = this.getAttribute('href');
+
+        if (!targetUrl) {
+          return;
+        }
+
+        event.preventDefault();
+        window.location.href = targetUrl;
+      });
+    });
+  </script>
 
 </body>
 </html>

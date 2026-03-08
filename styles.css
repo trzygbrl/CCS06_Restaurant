@@ -1,0 +1,49 @@
+body {
+    background: #f8f9fa;
+}
+
+.main-navbar {
+    background-color: #0a8f1f;
+    color: white;
+    font-weight: 700;
+}
+
+.navbar-toggle-btn {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-toggle-btn:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-title {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+    text-align: center;
+    flex: 1;
+}
+
+.nav-link {
+    color: #0a8f1f;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: #0a8f1f;
+    color: white;
+}
+
+.title-green {
+    color: #0a8f1f;
+    font-weight: 700;
+}
+
+.product-image {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
+

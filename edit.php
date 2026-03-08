@@ -11,7 +11,7 @@ if (isset($_POST["submit"])) {
   $result = mysqli_query($conn, $sql);
 
   if ($result) {
-    header("Location: index.php?msg=Data updated successfully");
+    header("Location: index.php?msg=Menu updated successfully");
   } else {
     echo "Failed: " . mysqli_error($conn);
   }

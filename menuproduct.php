@@ -83,6 +83,7 @@ if (!$connected) {
               <td><?php echo $row["ProductID"] ?></td>
               <td><?php echo $row["MenuID"] ?></td>
               <td>
+                <a href="edit_menuproduct.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
                 <a href="delete_menuproduct.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
               </td>
             </tr>

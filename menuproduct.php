@@ -60,33 +60,30 @@ if (!$connected) {
     ?>
   </div>
 
-  <div id="products" class="container">
-      <a href="add_product.php" class="btn btn-success mb-3">Add New</a>
+  <div id="menu" class="container">
+      <a href="add_menuproduct.php" class="btn btn-success mb-3">Add New</a>
 
       <table class="table table-hover text-center">
         <thead class="table-success">
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Image Path</th>
+            <th scope="col">Product ID</th>
+            <th scope="col">Menu ID</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <?php
-          $sql = "SELECT * FROM Products";
+          $sql = "SELECT * FROM MenuProducts";
           $result = mysqli_query($conn, $sql);
           while ($row = mysqli_fetch_assoc($result)) {
           ?>
             <tr>
               <td><?php echo $row["ID"] ?></td>
-              <td><?php echo $row["Name"] ?></td>
-              <td>₱ <?php echo number_format($row["Price"], 2) ?></td>
-              <td><?php echo $row["ImagePath"] ?></td>
+              <td><?php echo $row["ProductID"] ?></td>
+              <td><?php echo $row["MenuID"] ?></td>
               <td>
-                <a href="edit_product.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-                <a href="delete_product.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+                <a href="delete_menuproduct.php?id=<?php echo $row["ID"] ?>" class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
               </td>
             </tr>
           <?php

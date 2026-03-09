@@ -41,6 +41,9 @@ if (!$connected) {
         <li class="nav-item">
           <a class="nav-link" href="product.php" data-bs-dismiss="offcanvas">Products</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="menuproduct.php" data-bs-dismiss="offcanvas">Menu Products</a>
+        </li>
       </ul>
     </div>
   </div>
